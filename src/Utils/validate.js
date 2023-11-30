@@ -4,43 +4,42 @@ const validateName = (name) => {
 };
 
 function validaCPF(cpf) {
-  let Soma = 0;
-  let Resto;
+  let soma = 0;
+  let resto;
 
   const cpfToValidate = cpf.toString();
 
   if (cpfToValidate.length !== 11) return false;
 
-  if ([
-    '00000000000',
-    '11111111111',
-    '22222222222',
-    '33333333333',
-    '44444444444',
-    '55555555555',
-    '66666666666',
-    '77777777777',
-    '88888888888',
-    '99999999999',
-  ].indexOf(cpfToValidate) !== -1) return false;
+  const regexAllEqualDigits = /^(?:(\d)\1{10})$/;
 
-  for (i = 1; i <= 9; i++) Soma += parseInt(cpfToValidate.substring(i - 1, i)) * (11 - i);
+  if (regexAllEqualDigits.test(cpfToValidate)) {
+    return false;
+  }
 
-  Resto = (Soma * 10) % 11;
 
-  if ((Resto == 10) || (Resto == 11)) Resto = 0;
+  for (let i = 1; i <= 9; i++) 
+    soma += parseInt(cpfToValidate.substring(i - 1, i)) * (11 - i);
 
-  if (Resto != parseInt(cpfToValidate.substring(9, 10))) return false;
+  resto = (soma * 10) % 11;
 
-  Soma = 0;
+  if ((resto == 10) || (resto == 11)) 
+    resto = 0;
 
-  for (i = 1; i <= 10; i++) Soma += parseInt(cpfToValidate.substring(i - 1, i)) * (12 - i);
+  if (resto != parseInt(cpfToValidate.substring(9, 10))) 
+    return false;
 
-  Resto = (Soma * 10) % 11;
+  soma = 0;
 
-  if ((Resto == 10) || (Resto == 11)) Resto = 0;
+  for (let i = 1; i <= 10; i++) 
+    soma += parseInt(cpfToValidate.substring(i - 1, i)) * (12 - i);
 
-  if (Resto != parseInt(cpfToValidate.substring(10, 11))) return false;
+  resto = (soma * 10) % 11;
+
+  if ((resto == 10) || (resto == 11)) resto = 0;
+
+  if (resto != parseInt(cpfToValidate.substring(10, 11))) 
+    return false;
 
   return true;
 }
