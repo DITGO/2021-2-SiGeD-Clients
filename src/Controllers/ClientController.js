@@ -107,7 +107,6 @@ const create = async (req, res) => {
       createdAt: date,
       updatedAt: date,
     });
-    // const fullCliente = await Client.findOne({email:client.email}).populate('location');
     return res.json(client);
   } catch (error) {
     return res.status(400).json({ message: error.keyValue });
