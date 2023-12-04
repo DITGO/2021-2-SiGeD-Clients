@@ -11,25 +11,6 @@ const getDemands = async (token) => {
   }
 };
 
-// const sendEmailToClient = async (
-//   clientId,
-//   subject,
-//   text,
-//   token,
-//   dateString = '',
-// ) => {
-//   const body = { subject, text, dateString };
-//   const response = await APIClients.post(
-//     `/clients/send-email/${clientId}`,
-//     body,
-//     {
-//       headers: { 'x-access-token': token },
-//     },
-//   );
-//   return response;
-// };
-
 module.exports = {
   getDemands,
-  // sendEmailToClient,
 };
